@@ -1,22 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.33214.272
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{448CFA2D-302E-49D7-8B4B-46A1F589323C}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Febe.ConfigFilter", "Febe.ConfigFilter\Febe.ConfigFilter.csproj", "{A3A43E54-CEB0-4A12-8B37-CB8A191BD3BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Febe.ConfigFilter", "Febe.ConfigFilter\Febe.ConfigFilter.csproj", "{A3A43E54-CEB0-4A12-8B37-CB8A191BD3BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Febe.ConfigFilter.Tests", "Febe.ConfigFilter.Tests\Febe.ConfigFilter.Tests.csproj", "{EC52A27A-592E-4C64-8649-D08EBA111DA3}"
 EndProject
 Global
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {0B492285-8194-4326-B410-CB686C50AD22}
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
@@ -38,5 +34,23 @@ Global
 		{A3A43E54-CEB0-4A12-8B37-CB8A191BD3BF}.Release|x64.Build.0 = Release|Any CPU
 		{A3A43E54-CEB0-4A12-8B37-CB8A191BD3BF}.Release|x86.ActiveCfg = Release|Any CPU
 		{A3A43E54-CEB0-4A12-8B37-CB8A191BD3BF}.Release|x86.Build.0 = Release|Any CPU
+		{EC52A27A-592E-4C64-8649-D08EBA111DA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC52A27A-592E-4C64-8649-D08EBA111DA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC52A27A-592E-4C64-8649-D08EBA111DA3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EC52A27A-592E-4C64-8649-D08EBA111DA3}.Debug|x64.Build.0 = Debug|Any CPU
+		{EC52A27A-592E-4C64-8649-D08EBA111DA3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EC52A27A-592E-4C64-8649-D08EBA111DA3}.Debug|x86.Build.0 = Debug|Any CPU
+		{EC52A27A-592E-4C64-8649-D08EBA111DA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC52A27A-592E-4C64-8649-D08EBA111DA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC52A27A-592E-4C64-8649-D08EBA111DA3}.Release|x64.ActiveCfg = Release|Any CPU
+		{EC52A27A-592E-4C64-8649-D08EBA111DA3}.Release|x64.Build.0 = Release|Any CPU
+		{EC52A27A-592E-4C64-8649-D08EBA111DA3}.Release|x86.ActiveCfg = Release|Any CPU
+		{EC52A27A-592E-4C64-8649-D08EBA111DA3}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0B492285-8194-4326-B410-CB686C50AD22}
 	EndGlobalSection
 EndGlobal
