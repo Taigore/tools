@@ -1,9 +1,13 @@
-namespace Febe.ConfigFilter.Tests
+﻿namespace Febe.ConfigFilter.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using System.Xml.Linq;
 
-    public class FilterClean
+    public class FilterSmudge
     {
         private readonly MemoryStream output = new MemoryStream();
 
@@ -13,7 +17,7 @@ namespace Febe.ConfigFilter.Tests
             var input = StreamString("");
 
             var filter = new Filter(input, output);
-            filter.Clean();
+            filter.Smudge();
 
             output.Position = 0;
             var reader = new StreamReader(output);
@@ -26,7 +30,7 @@ namespace Febe.ConfigFilter.Tests
             var input = StreamString("<myRoot></myRoot>");
 
             var filter = new Filter(input, output);
-            filter.Clean();
+            filter.Smudge();
 
             output.Position = 0;
 
@@ -45,7 +49,7 @@ namespace Febe.ConfigFilter.Tests
 </root>");
 
             var filter = new Filter(input, output);
-            filter.Clean();
+            filter.Smudge();
 
             output.Position = 0;
 
@@ -57,43 +61,22 @@ namespace Febe.ConfigFilter.Tests
         }
 
         [Fact]
-        public void ContentsOfChildElementAreCleared()
+        public void ChildElementIsFilledWithValue()
         {
             var input = StreamString(@"<root>
-  <value>XYZ</value>
+  <child></child>
 </root>");
 
             var filter = new Filter(input, output);
-            filter.Clean();
+            filter.Smudge();
 
             output.Position = 0;
 
             var result = XDocument.Load(output);
             var root = result.Root;
             Assert.Collection(root!.Elements(),
-                x => Assert.Equal(string.Empty, x.Value)
+                x => Assert.NotEmpty(x.Value)
             );
-        }
-
-        [Fact]
-        public void CleanOutputIsNotChanged()
-        {
-            var source = @"<?xml version=""1.0"" encoding=""utf-8""?>
-<root>
-  <value></value>
-</root>";
-
-            var input = StreamString(source);
-
-            var filter = new Filter(input, output);
-            filter.Clean();
-
-            output.Position = 0;
-
-            var reader = new StreamReader(output);
-            var result = reader.ReadToEnd();
-
-            Assert.Equal(source, result);
         }
 
         private NoSeekStream StreamString(string content)
