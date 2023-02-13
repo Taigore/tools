@@ -15,9 +15,11 @@
         public void IfInputStreamIsEmptyOutputStreamIsEmpty()
         {
             var input = StreamString("");
+            var loader = new ConfigLoader("");
+            loader.ReadLines = s => Enumerable.Empty<string>();
 
             var filter = new Filter(input, output);
-            filter.Smudge();
+            filter.Smudge(loader);
 
             output.Position = 0;
             var reader = new StreamReader(output);
@@ -28,9 +30,11 @@
         public void RootElementRemainsTheSame()
         {
             var input = StreamString("<myRoot></myRoot>");
+            var loader = new ConfigLoader("");
+            loader.ReadLines = s => Enumerable.Empty<string>();
 
             var filter = new Filter(input, output);
-            filter.Smudge();
+            filter.Smudge(loader);
 
             output.Position = 0;
 
@@ -47,9 +51,11 @@
             var input = StreamString(@"<root>
   <child></child>
 </root>");
+            var loader = new ConfigLoader("");
+            loader.ReadLines = s => Enumerable.Empty<string>();
 
             var filter = new Filter(input, output);
-            filter.Smudge();
+            filter.Smudge(loader);
 
             output.Position = 0;
 
@@ -66,9 +72,11 @@
             var input = StreamString(@"<root>
   <child></child>
 </root>");
+            var loader = new ConfigLoader("");
+            loader.ReadLines = s => new[] { "child=X" };
 
             var filter = new Filter(input, output);
-            filter.Smudge();
+            filter.Smudge(loader);
 
             output.Position = 0;
 
@@ -76,6 +84,29 @@
             var root = result.Root;
             Assert.Collection(root!.Elements(),
                 x => Assert.NotEmpty(x.Value)
+            );
+        }
+
+        [Fact]
+        public void ChildElementsAreFilledWithConfigLoader()
+        {
+            var input = StreamString(@"<root>
+  <alfa></alfa>
+  <beta></beta>
+</root>");
+            var loader = new ConfigLoader("");
+            loader.ReadLines = s => new[] { "alfa=A", "beta=10" };
+
+            var filter = new Filter(input, output);
+            filter.Smudge(loader);
+
+            output.Position = 0;
+
+            var result = XDocument.Load(output);
+            var root = result.Root;
+            Assert.Collection(root!.Elements(),
+                x => Assert.Equal("A", x.Value),
+                x => Assert.Equal("10", x.Value)
             );
         }
 
