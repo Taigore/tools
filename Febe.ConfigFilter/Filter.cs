@@ -2,6 +2,7 @@
 {
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Text;
     using System.Xml;
     using System.Xml.Linq;
 
@@ -35,7 +36,14 @@
                     e.Value = string.Empty;
                 }
 
-                document.Save(output);
+                var writer = XmlWriter.Create(output, new XmlWriterSettings
+                {
+                    OmitXmlDeclaration = true,
+                    Indent = true,
+                });
+
+                document.WriteTo(writer);
+                writer.Flush();
             }
         }
 
@@ -49,7 +57,7 @@
             }
             else
             {
-                if(configLoader == null)
+                if (configLoader == null)
                 {
                     throw new NotImplementedException("Missing config loader");
                 }
@@ -60,7 +68,7 @@
                 foreach (var e in root!.Elements())
                 {
                     var name = e.Name.LocalName;
-                    if(configLoader.Values.TryGetValue(name, out var value))
+                    if (configLoader.Values.TryGetValue(name, out var value))
                     {
                         e.Value = value;
                     }
@@ -122,10 +130,10 @@
         public void Load()
         {
             var result = new Dictionary<string, string>();
-            foreach(var l in ReadLines(sourcePath))
+            foreach (var l in ReadLines(sourcePath))
             {
                 var parts = l.Split(new char[] { '=' }, 2);
-                if(parts.Length == 2)
+                if (parts.Length == 2)
                 {
                     result.Add(parts[0], parts[1]);
                 }
