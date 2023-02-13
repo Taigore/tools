@@ -1,0 +1,2 @@
+﻿alfa=100
+beta=btt
