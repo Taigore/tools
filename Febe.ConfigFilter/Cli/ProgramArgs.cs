@@ -16,6 +16,7 @@
             var action = args[0];
             if(action != "clean" && action != "smudge")
             {
+                Console.WriteLine("Call the program with argument clean or smudge");
                 return null;
             }
 
