@@ -9,6 +9,7 @@
     public class ProgramArgs
     {
         public string Action { get; }
+        public string? ConfigPath { get; }
 
         public static ProgramArgs? Parse(string[] args)
         {
@@ -18,12 +19,27 @@
                 return null;
             }
 
-            return new ProgramArgs(action);
+            var configPath = (string?)null;
+            for (int i = 1; i < args.Length; ++i)
+            {
+                switch (args[i])
+                {
+                    case "--config":
+                        configPath = args[++i];
+                        continue;
+                    default:
+                        Console.WriteLine("Unrecognized argument: {0}", args[i]);
+                        return null;
+                }
+            }
+
+            return new ProgramArgs(action, configPath);
         }
 
-        public ProgramArgs(string action)
+        public ProgramArgs(string action, string? configPath)
         {
             Action = action;
+            ConfigPath = configPath;
         }
     }
 }
