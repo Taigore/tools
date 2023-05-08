@@ -13,7 +13,7 @@
 
         public static ProgramArgs? Parse(string[] args)
         {
-            var action = args[0];
+            var action = args.FirstOrDefault();
             if(action != "clean" && action != "smudge")
             {
                 Console.WriteLine("Call the program with argument clean or smudge");
